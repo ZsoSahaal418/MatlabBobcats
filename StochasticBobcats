@@ -1,0 +1,16 @@
+a=zeros(50,21);
+number_of_bobcats_initial=100;
+a(:,1)=number_of_bobcats_initial;
+for trial=1:50
+    for time=1:20
+    number_of_bobcats=(1+(0.4+0.1*randn)-(0.32+0.07*randn))*a(trial,time);
+    a(trial,time+1)=number_of_bobcats;
+    end
+end
+ 
+x = 0:1:20;
+y=a(:,:);
+plot(x,y)
+xlabel('Years');    %  label the x-axis
+ylabel('Population Size');  %  label the y-axis
+title('Demographic Stochastic Bobcat Population');  %  put a title on the plot
