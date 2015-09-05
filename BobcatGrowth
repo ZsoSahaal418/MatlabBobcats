@@ -1,0 +1,22 @@
+b=zeros(50,21);
+number_of_bobcats_initial=100;
+b(:,1)=number_of_bobcats_initial;
+rnc=(1+0.4-0.32);%rate of growth/decay if catosphre does not occur
+rc=(1+0.1-.62);%rate of growth/decay if catosphre occurs
+for trial=1:50
+    for time=1:20
+        if random('Uniform',0,1)<0.04
+        number_of_bobcats=(rc)*b(trial,time);
+        else  
+        number_of_bobcats=(rnc)*b(trial,time);    
+        end    
+    b(trial,time+1)=number_of_bobcats;
+    end
+end
+ 
+x = 0:1:20;
+y=b(:,:);
+plot(x,y)
+xlabel('Years');    %  label the x-axis
+ylabel('Population Size');  %  label the y-axis
+title('Environmental Stochastic Bobcat Population');  %  put a title on the plot
