@@ -1,0 +1,39 @@
+clc;
+N_trials=50;
+N_years=20;
+ 
+matrix_of_populations=zeros(N_trials,N_years+1);
+Population=zeros(1,N_years+1);
+ 
+for trial=1:N_trials
+  Population(1)=100; % initial (time=0) size of population for all trials
+  for year=1:N_years
+    birthrate=.4+randn*.1;        % birthrate N(.4,.1)
+    survivalrate=.68+randn*.07;   % survivalrate=N(.68,.07)
+    catastrophe=rand<.04;
+    if catastrophe
+        birthrate=birthrate*.7;
+        survivalrate=survivalrate*.7;
+    end
+    Population(year+1)=(birthrate+survivalrate)*Population(year);
+ end
+  matrix_of_populations(trial,:)=Population;
+end
+ 
+figure(1)
+subplot(1,2,1)
+boxplot(matrix_of_populations)
+hold on
+plot(1:21,100*(1.08.^[0:20]))
+hold off
+subplot(1,2,2)
+plot(0:20,matrix_of_populations')
+ 
+figure(2)
+hist(matrix_of_populations(:,21))
+ 
+figure(3)
+mesh(matrix_of_populations)
+ 
+ 
+%%
